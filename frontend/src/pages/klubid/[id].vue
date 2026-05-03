@@ -114,6 +114,7 @@ export default {
 
       if(this.club?.name){
         this.topPlayers = await fetchClubTopPlayers(this.club.name)
+        console.log("Club: ", this.club);
       }
 
   
