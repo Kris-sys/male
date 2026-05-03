@@ -320,4 +320,5 @@ module.exports = {
     SELECT_TOP_CLUBS,
     getAddOrUpdateClubQuery,
     DELETE_CLUB,
+  SELECT_TOP_PLAYERS_BY_CLUB,
 };
