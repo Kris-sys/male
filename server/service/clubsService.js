@@ -1,5 +1,5 @@
 const {pool} = require("../database")
-const {SELECT_ALL_CLUBS, SELECT_CLUB_BY_ID, SELECT_TOP_CLUBS, INSERT_CLUB, getAddOrUpdateClubQuery, DELETE_CLUB} = require("./queries");
+const {SELECT_ALL_CLUBS, SELECT_CLUB_BY_ID, SELECT_TOP_CLUBS, INSERT_CLUB, getAddOrUpdateClubQuery, DELETE_CLUB, SELECT_TOP_PLAYERS_BY_CLUB} = require("./queries");
 
 const getAllClubs = (req, res) => {
     console.log("IN - Get all clubs request")
@@ -96,4 +96,4 @@ const deleteClub = (req, res) => {
     })
 }
 
-module.exports = { getAllClubs, getClubById, addClub, getTopClubs, deleteClub }
+module.exports = { getAllClubs, getClubById, addClub, getTopClubs, deleteClub, getClubTopPlayers }
