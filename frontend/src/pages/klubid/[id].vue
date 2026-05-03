@@ -48,7 +48,7 @@
         </v-col>
       </v-row>
 
-      <v-row v-if="topPlayers.length">
+      <v-row>
         <v-col>
           <h2>Klubi top 3 mängijat</h2>
           <div v-for="(player, index) in topPlayers" :key="index">
