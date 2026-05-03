@@ -48,7 +48,7 @@ export async function fetchTopPlayers(limit) {
 
 export async function fetchClubTopPlayers(name) {
   try {
-    const response = await apiClient.get(`/players/topPlayers/${name}`);
+    const response = await apiClient.get(`/players/top/club/${name}`);
     return mapPlayersData(response.data);
   }
   catch (error) {
