@@ -1,6 +1,6 @@
 const {pool} = require("../database")
 const {SELECT_ALL_PLAYERS, SELECT_PLAYER_BY_ID, SELECT_ALL_PLAYERS_IN_CLUB, SELECT_PLAYER_STATISTICS,
-    SELECT_TOP_PLAYERS, INSERT_PLAYER, getAddOrUpdatePlayerQuery, DELETE_PLAYER
+    SELECT_TOP_PLAYERS, INSERT_PLAYER, getAddOrUpdatePlayerQuery, DELETE_PLAYER, SELECT_TOP_PLAYERS_BY_CLUB
 } = require("./queries");
 
 const getAllPlayers = (req, res) => {
