@@ -40,7 +40,7 @@ export async function fetchPlayerStatistics(playerId) {
 export async function fetchTopPlayers(limit) {
   try {
     const response = await apiClient.get( `/players/top/${limit}`);
-    return mapPlayersData(response.data);
+    return mapClubTopPlayersData(response.data);
   } catch (error) {
     console.error('Error fetching top players', error);
   }
@@ -70,6 +70,14 @@ export async function removePlayer(playerId) {
   } catch (error) {
     console.error('Error deleting player', error);
   }
+}
+
+function mapClubTopPlayersData(players) {
+  return players.map(player => ({
+    name: player.isik,
+    score: player.punktisumma,
+    time: player.aeg
+  }));
 }
 
 function mapPlayersData(players) {
