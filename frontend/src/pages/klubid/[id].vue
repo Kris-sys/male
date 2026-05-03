@@ -85,6 +85,7 @@ export default {
       club: null,
       clubId: null,
       showModifyClubDialog: false,
+      topPlayers: []
     }
   },
   created() {
@@ -98,6 +99,8 @@ export default {
   methods: {
     async fetchClubData() {
       this.club = await fetchClubById(this.clubId)
+
+  this.topPlayers = await fetchClubTopPlayers(this.clubId)
     },
     openModifyClubDialog() {
       this.showModifyClubDialog = true;
