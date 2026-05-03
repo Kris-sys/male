@@ -48,11 +48,22 @@
         </v-col>
       </v-row>
 
+      <v-row v-if="topPlayers.length">
+        <v-col>
+          <h2>Klubi top 3 möngijat</h2>
+          <div v-for="(player, index) in topPlayers" :key="index">
+            
+            </div>
+        </v-col>
+      </v-row>
+      
       <v-row>
         <v-col>
           <PlayersSearchTable :club-id="clubId" />
         </v-col>
       </v-row>
+
+      
 
     </div>
     <div v-else>
