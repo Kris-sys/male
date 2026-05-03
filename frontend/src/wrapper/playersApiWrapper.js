@@ -52,7 +52,7 @@ export async function fetchClubTopPlayers(name) {
     return mapClubTopPlayersData(response.data);
   }
   catch (error) {
-    console.log('Error fetching club top players', error);
+    console.error('Error fetching club top players', error);
   }
 }
 
