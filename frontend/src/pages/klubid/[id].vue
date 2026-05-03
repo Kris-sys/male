@@ -112,7 +112,7 @@ export default {
     async fetchClubData() {
       this.club = await fetchClubById(this.clubId)
 
-      if(club?.name){
+      if(this.club?.name){
         this.topPlayers = await fetchClubTopPlayers(this.club.name)
       }
 
