@@ -53,6 +53,20 @@ const getTopClubs = (req, res) => {
     })
 }
 
+const getClubTopPlayers = (req, res) => {
+    const name = req.params.name
+
+    pool.query(SELECT_TOP_PLAYERS_BY_CLUB, [name], (err, results) => {
+        if(err){
+            return res.status(500).send({
+                message: "Error", error: err
+            })
+        }
+
+        res.status(200).send(results.rows)
+    })
+}
+
 const addClub = (req, res) => {
     const {name, location, isUpdate, clubId} = req.body
     const update = JSON.parse(isUpdate)
