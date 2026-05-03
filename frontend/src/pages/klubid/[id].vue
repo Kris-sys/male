@@ -52,7 +52,7 @@
         <v-col>
           <h2>Klubi top 3 möngijat</h2>
           <div v-for="(player, index) in topPlayers" :key="index">
-            <strong>{{index + 1 }}</strong> {{player.name}}
+            <strong>{{index + 1 }}.</strong> {{ player.name }}
             <div>Skoor: {{player.score}}</div>
             </div>
         </v-col>
@@ -112,7 +112,11 @@ export default {
     async fetchClubData() {
       this.club = await fetchClubById(this.clubId)
 
-  this.topPlayers = await fetchClubTopPlayers(this.clubId)
+      if(club?.name){
+        this.topPlayers = await fetchClubTopPlayers(this.club.name)
+      }
+
+  
     },
     openModifyClubDialog() {
       this.showModifyClubDialog = true;
