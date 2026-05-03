@@ -40,7 +40,7 @@ export async function fetchPlayerStatistics(playerId) {
 export async function fetchTopPlayers(limit) {
   try {
     const response = await apiClient.get( `/players/top/${limit}`);
-    return mapClubTopPlayersData(response.data);
+    return mapPlayersData(response.data);
   } catch (error) {
     console.error('Error fetching top players', error);
   }
@@ -49,7 +49,7 @@ export async function fetchTopPlayers(limit) {
 export async function fetchClubTopPlayers(name) {
   try {
     const response = await apiClient.get(`/players/top/club/${name}`);
-    return mapPlayersData(response.data);
+    return mapClubTopPlayersData(response.data);
   }
   catch (error) {
     console.log('Error fetching club top players', error);
