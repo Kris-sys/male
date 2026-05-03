@@ -46,6 +46,16 @@ export async function fetchTopPlayers(limit) {
   }
 }
 
+export async function fetchClubTopPlayers(name) {
+  try {
+    const response = await apiClient.get(`/players/topPlayers/${name}`);
+    return mapPlayersData(response.data);
+  }
+  catch (error) {
+    console.log('Error fetching club top players', error);
+  }
+}
+
 export async function addPlayer(player) {
   try {
     await apiClient.post('/players', player);
