@@ -50,7 +50,7 @@
 
       <v-row v-if="topPlayers.length">
         <v-col>
-          <h2>Klubi top 3 möngijat</h2>
+          <h2>Klubi top 3 mängijat</h2>
           <div v-for="(player, index) in topPlayers" :key="index">
             <strong>{{index + 1 }}.</strong> {{ player.name }}
             <div>Skoor: {{player.score}}</div>
