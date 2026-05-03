@@ -4,7 +4,7 @@ const {SELECT_ALL_PLAYERS, SELECT_PLAYER_BY_ID, SELECT_ALL_PLAYERS_IN_CLUB, SELE
 } = require("./queries");
 
 const getAllPlayers = (req, res) => {
-    console.log("IN - Get all players request")
+    //console.log("IN - Get all players request")
 
     pool.query(SELECT_ALL_PLAYERS, (err, results) => {
         if (err) {
@@ -15,14 +15,14 @@ const getAllPlayers = (req, res) => {
             })
         }
 
-        console.log("OUT - Get all players result: " + JSON.stringify(results.rows))
+        //console.log("OUT - Get all players result: " + JSON.stringify(results.rows))
         res.status(200).send(results.rows)
     })
 }
 
 const getPlayerById = (req, res) => {
     const id = parseInt(req.params.id)
-    console.log(`IN - Get player(id=${id}) request`)
+   // console.log(`IN - Get player(id=${id}) request`)
 
     pool.query(SELECT_PLAYER_BY_ID, [id], (err, results) => {
         if (err) {
@@ -33,14 +33,14 @@ const getPlayerById = (req, res) => {
             })
         }
 
-        console.log(`OUT - Get player(id=${id}) result: ${JSON.stringify(results.rows[0])}`)
+        //console.log(`OUT - Get player(id=${id}) result: ${JSON.stringify(results.rows[0])}`)
         res.status(200).send(results.rows[0])
     })
 }
 
 const getPlayersByClubId = (req, res) => {
     const id = parseInt(req.params.id)
-    console.log(`IN - Get players for club(id=${id})`)
+    //console.log(`IN - Get players for club(id=${id})`)
 
     pool.query(SELECT_ALL_PLAYERS_IN_CLUB, [id], (err, results) => {
         if (err) {
@@ -51,14 +51,14 @@ const getPlayersByClubId = (req, res) => {
             })
         }
 
-        console.log(`OUT - Get players for club(id=${id}) result: ${JSON.stringify(results.rows)}`)
+        //console.log(`OUT - Get players for club(id=${id}) result: ${JSON.stringify(results.rows)}`)
         res.status(200).send(results.rows)
     })
 }
 
 const getPlayerStatistics = (req, res) => {
     const id = parseInt(req.params.id)
-    console.log(`IN - Get player(id=${id}) statistics request`)
+    //console.log(`IN - Get player(id=${id}) statistics request`)
 
     pool.query(SELECT_PLAYER_STATISTICS, [id], (err, results) => {
         if (err) {
@@ -68,14 +68,14 @@ const getPlayerStatistics = (req, res) => {
             })
         }
 
-        console.log(`OUT - Get player(id=${id}) statistics result: ${JSON.stringify(results.rows[0])}`)
+        //console.log(`OUT - Get player(id=${id}) statistics result: ${JSON.stringify(results.rows[0])}`)
         res.status(200).send(results.rows[0])
     })
 }
 
 const getTopPlayers = (req, res) => {
     const limit = parseInt(req.params.limit)
-    console.log(`IN - Get top players request (limit=${limit})`)
+    //console.log(`IN - Get top players request (limit=${limit})`)
 
     pool.query(SELECT_TOP_PLAYERS, [limit], (err, results) => {
         if (err) {
@@ -86,7 +86,7 @@ const getTopPlayers = (req, res) => {
             })
         }
 
-        console.log(`OUT - Get top players result (limit=${limit}): ${JSON.stringify(results.rows)}`)
+        //console.log(`OUT - Get top players result (limit=${limit}): ${JSON.stringify(results.rows)}`)
         res.status(200).send(results.rows)
     })
 }
@@ -94,7 +94,7 @@ const getTopPlayers = (req, res) => {
 const addPlayer = (req, res) => {
     const {firstName, lastName, club, dateOfBirth, gender, ranking, isUpdate, playerId} = req.body
     const update = JSON.parse(isUpdate)
-    console.log(`IN - Add player(first=${firstName}, last=${lastName}, update=${update}) request`)
+    //console.log(`IN - Add player(first=${firstName}, last=${lastName}, update=${update}) request`)
 
     const query = getAddOrUpdatePlayerQuery(isUpdate)
     let values = [firstName, lastName, club, dateOfBirth, gender, ranking]
@@ -110,14 +110,14 @@ const addPlayer = (req, res) => {
             })
         }
 
-        console.log(`OUT - Add player(${firstName} ${lastName}) result: success`)
+        //console.log(`OUT - Add player(${firstName} ${lastName}) result: success`)
         res.status(201).send(`Player added with ID: ${results.insertId}`)
     });
 }
 
 const deletePlayer = (req, res) => {
     const playerId = parseInt(req.params.playerId)
-    console.log(`IN - Delete player(id=${playerId}) request`)
+    //console.log(`IN - Delete player(id=${playerId}) request`)
 
     pool.query(DELETE_PLAYER, [playerId], (err, results) => {
         if (err) {
@@ -128,8 +128,22 @@ const deletePlayer = (req, res) => {
             })
         }
 
-        console.log(`OUT - Delete player(id=${playerId}) result: success`)
+        //console.log(`OUT - Delete player(id=${playerId}) result: success`)
         res.status(200).send(`Player deleted with ID: ${playerId}`)
+    })
+}
+
+const getClubTopPlayers = (req, res) => {
+    const name = req.params.name
+    console.log(`IN - Getting top players(id=${name}) request`)
+    pool.query(SELECT_TOP_PLAYERS_BY_CLUB, [name], (err, results) => {
+        if(err){
+            return res.status(500).send({
+                message: "Error", error: err
+            })
+        }
+console.log(`OUT - Returnring best players(id=${name}) request`)
+        res.status(200).send(results.rows)
     })
 }
 
@@ -141,4 +155,5 @@ module.exports = {
     addPlayer,
     getTopPlayers,
     deletePlayer,
+    getClubTopPlayers,
 }
