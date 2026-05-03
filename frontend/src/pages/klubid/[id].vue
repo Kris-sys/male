@@ -71,6 +71,7 @@ import {fetchClubById} from "@/wrapper/clubsApiWrapper.js";
 import PlayersSearchTable from "@/components/clubs/PlayersSearchTable.vue";
 import AddClubDialog from "@/components/clubs/AddClubDialog.vue";
 import ModifyClubForm from "@/components/clubs/ModifyClubForm.vue";
+  import {fetchClubTopPlayers} from "@/wrapper/playersApiWrapper.js";
 
 export default {
   name: 'ClubDetailsPage',
